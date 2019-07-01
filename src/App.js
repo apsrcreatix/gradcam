@@ -1,5 +1,8 @@
+/* eslint-disable no-lone-blocks */
+/* eslint-disable jsx-a11y/anchor-is-valid */
 import React from 'react';
 import NavBar from './components/NavBar';
+import BottomNav from './components/BottomNav';
 export default class App extends React.Component {
 
   constructor(props) {
@@ -42,11 +45,33 @@ export default class App extends React.Component {
 
   render() {
     return (
-      <div>
-        <NavBar />
-        <section className="hero is-primary">
-          <div className="hero-body">
-            <div className="container">
+      <section className="hero is-black is-fullheight">
+  {/* <!-- Hero head: will stick at the top --> */}
+  <div className="hero-head">
+  <NavBar/>
+  </div>
+
+  {/* <!-- Hero content: will be in the middle --> */}
+  <div className="hero-body">
+    <div className="container has-text-centered grid-centering">
+      <div style={{
+        background: 'linear-gradient(red, yellow, green)',
+        width: '300px',
+        height: '300px'
+      }} className="dynamic-shadow">
+      </div>
+    </div>
+  </div>
+
+  {/* <!-- Hero footer: will stick at the bottom --> */}
+  <BottomNav/>
+</section>
+    )
+  }
+}
+
+{/* <section>
+        <div className="container">
               <h1 className="title">
                 GradCam
       </h1>
@@ -56,10 +81,4 @@ export default class App extends React.Component {
               <input className="input" type="number" placeholder="Text input" onChange={(e) => this.handleChange(e)} />
               <button className="button" onClick={() => this.firstCall()} >Fetch Colors</button>
             </div>
-          </div>
-        </section>
-      </div>
-
-    )
-  }
-}
+        </section> */}
