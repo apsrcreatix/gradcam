@@ -5,7 +5,8 @@ import logo from '../static/img/rgb.png';
 function Menu() {
   return (
     <div>
-        {
+<header className="navbar is-black">
+{
             document.addEventListener('DOMContentLoaded', () => {
 
                 // Get all "navbar-burger" elements
@@ -32,50 +33,34 @@ function Menu() {
               
               })
         }
-     <div className="navbar is-black" role="navigation" aria-label="main navigation">
-  <div className="navbar-brand">
-    <a className="navbar-item" href="https://github.com/apsrcreatix">
+      <div className="container">
+        <div className="navbar-brand">
+        <a className="navbar-item" href="https://github.com/apsrcreatix">
       <img src={logo} width="30" height="40" alt="logo rbg"/>
     </a>
-    
-    <a role="button" className="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
-      <span aria-hidden="true"></span>
-      <span aria-hidden="true"></span>
-      <span aria-hidden="true"></span>
-    </a>
-  </div>
-
-  <div id="navbarBasicExample" className="navbar-menu">
-    <div className="navbar-start">
-      <a className="navbar-item">
-        Gradcam
-      </a>
-
-  
-    </div>
-    <div class="navbar-end">
-      <div class="navbar-item">
-        <div class="field is-grouped">
-          <p class="control">
-            <a class="bd-tw-button button" data-social-network="Twitter" data-social-action="tweet" data-social-target="http://localhost:4000" target="_blank" href="https://twitter.com/intent/tweet?text=Try Gradcam. It's fun! &amp;hashtags=apsrcreatix&amp;url=http://github.com/apsrcreatix&amp;via=apsrsince97">
-              <span class="icon">
-                <i class="fab fa-twitter"></i>
-              </span>
-              <span>
-                Tweet
-              </span>
+          <span className="navbar-burger burger" data-target="navbarMenuHeroC">
+            <span></span>
+            <span></span>
+            <span></span>
+          </span>
+        </div>
+        <div id="navbarMenuHeroC" className="navbar-menu">
+          <div className="navbar-end">
+            <a className="navbar-item">
+              Documentation
             </a>
-          </p>
-          <p className="control">
-          <a href="https://bulma.io">
-  <img src="https://bulma.io/images/made-with-bulma--white.png" alt="Made with Bulma" width="auto" height="24"/>
-</a>
-            </p>
+            <span className="navbar-item">
+              <a className="button is-success is-inverted">
+                <span className="icon">
+                  <i className="fab fa-github"></i>
+                </span>
+                <span>Github</span>
+              </a>
+            </span>
+          </div>
         </div>
       </div>
-    </div>
-  </div>
-</div>
+    </header>
     </div>
   );
 }
