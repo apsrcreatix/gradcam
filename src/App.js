@@ -21,6 +21,8 @@ export default class App extends React.Component {
     this.firstCall.bind(this);
     this.handleChange.bind(this);
     this.componentDidMount.bind(this);
+  
+    
   }
 
   firstCall() {
@@ -40,34 +42,36 @@ export default class App extends React.Component {
       })
       .then(data => console.log('Success:', data))
       .catch(error => console.error('Error:', error));
+      
   }
   
   componentDidMount() {
     this.firstCall();
     VanillaTilt.init(document.querySelectorAll(".dynamic-shadow"),{
       max:25,
-      speed:400,
+      speed:500,
       glare:true,
+      scale: 1.2,
       'max-glare':0.5
     });
   }
-
 
   handleChange(e) {
     this.setState({
       count: e.target.value
     })
   }
+
   handleSelect(e) {
     this.setState({
       type: e.target.value
     })
   }
+
   handleActiveOption(e) {
     this.setState({
     activeOption : e.target.outerText
     })
-    console.log("hehe",e.target.outerText,e.target)
   }
 
   render() {
@@ -81,7 +85,10 @@ export default class App extends React.Component {
   <div className="hero-body">
     <div className="container has-text-centered grid-centering">
       {this.state.activeOption==='Home' ?
-       <GradientBox type={this.state.type} colors={this.state.colors} change={()=>this.firstCall()}/>
+       <GradientBox
+        type={this.state.type} 
+        colors={this.state.colors} 
+        change={()=>this.firstCall()}/>
       : this.state.activeOption==='Settings' ?
       <Settings 
       colors={this.state.colors} 
