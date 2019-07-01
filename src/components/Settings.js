@@ -14,7 +14,7 @@ function Settings(props) {
                 <h1 className="title">
                     Settings
                 </h1>
-                <p className="subtitle">
+                <p className="subtitle" style={{ whiteSpace: 'nowrap',width: '400px',overflow: 'hidden',textOverflow: 'ellipsis'}}>
                     {props.colors.map((value, index, array) => <span key={`${value}`}><span style={{ background: value }}>{value}</span>{(array.length === index + 1) ? "." : ","}</span>)}
                 </p>
                 <label htmlFor="noc">Number Of Colors</label>
@@ -32,8 +32,8 @@ function Settings(props) {
                 </div>
                 <label htmlFor="tog">Gradient Type</label>
                 <div className="select">
-                    <select name="type" id="tog">
-                        <option value={props.currentType} onChange={props.handleSelect}>{props.currentType}</option>
+                    <select name="type" id="tog" onChange={props.handleSelect}>
+                        <option value={props.currentType} >{props.currentType}</option>
                         {(GRADIENT_TYPE.filter((value1)=>value1!==props.currentType)).map((value)=><option key={value} value={value}>{value}</option>)}
                     </select>
                 </div>
