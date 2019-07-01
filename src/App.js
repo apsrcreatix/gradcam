@@ -3,15 +3,20 @@
 import React from 'react';
 import NavBar from './components/NavBar';
 import BottomNav from './components/BottomNav';
+import Settings from './components/Settings';
+import GradientBox from './components/GradientBox';
 import VanillaTilt from 'vanilla-tilt';
+
 export default class App extends React.Component {
 
   constructor(props) {
     super(props)
     this.state = {
-      colors: {},
+      colors: [],
       count: 2,
-      settings : false,
+      activeOption : 'About',
+      type: "linear-gradient",
+      style: "",
     }
     this.firstCall.bind(this);
     this.handleChange.bind(this);
@@ -26,15 +31,17 @@ export default class App extends React.Component {
         return response.json();
       })
       .then(data => {
-        var colors = data.colors
+        let values = data.colors;
+        let colors=values.map((value)=>value["value"]);
         this.setState({
           colors
         })
+        return colors;
       })
-      .then(response => console.log('Success:', JSON.stringify(response)))
+      .then(data => console.log('Success:', data))
       .catch(error => console.error('Error:', error));
   }
-
+  
   componentDidMount() {
     this.firstCall();
     VanillaTilt.init(document.querySelectorAll(".dynamic-shadow"),{
@@ -42,7 +49,7 @@ export default class App extends React.Component {
       speed:400,
       glare:true,
       'max-glare':0.5
-    })
+    });
   }
 
 
@@ -50,7 +57,17 @@ export default class App extends React.Component {
     this.setState({
       count: e.target.value
     })
-    console.log(e.target.value);
+  }
+  handleSelect(e) {
+    this.setState({
+      type: e.target.value
+    })
+  }
+  handleActiveOption(e) {
+    this.setState({
+    activeOption : e.target.outerText
+    })
+    console.log("hehe",e.target.outerText,e.target)
   }
 
   render() {
@@ -60,49 +77,27 @@ export default class App extends React.Component {
   <div className="hero-head">
   <NavBar/>
   </div>
-
   {/* <!-- Hero content: will be in the middle --> */}
   <div className="hero-body">
     <div className="container has-text-centered grid-centering">
-      {!this.state.settings ?
-      <div 
-      style={{
-        background: 'linear-gradient(red, yellow, green)',
-        width: '300px',
-        height: '300px'
-      }} 
-      className="dynamic-shadow">
-      </div>:<section>
-        <div className="container">
-              <h1 className="title">
-                Settings
-        </h1>
-              <h2 className="subtitle">
-                {JSON.stringify(this.state.colors)}
-              </h2>
-              <input className="input" type="number" placeholder="Text input" onChange={(e) => this.handleChange(e)} />
-              <button className="button" onClick={() => this.firstCall()} >Fetch Colors</button>
-            </div>
-        </section>}
+      {this.state.activeOption==='Home' ?
+       <GradientBox type={this.state.type} colors={this.state.colors} change={()=>this.firstCall()}/>
+      : this.state.activeOption==='Settings' ?
+      <Settings 
+      colors={this.state.colors} 
+      count={this.state.count} 
+      handleChange={(e) => this.handleChange(e)} 
+      handleSelect={(e) => this.handleSelect(e)} 
+      submitCount={() => this.firstCall()}
+      currentType={this.state.type}
+      />: <h1>Hello, World!</h1>
+      }
     </div>
   </div>
 
   {/* <!-- Hero footer: will stick at the bottom --> */}
-  <BottomNav/>
+  <BottomNav activeOption={this.state.activeOption} handleActiveOption={(e)=>this.handleActiveOption(e)}/>
 </section>
     )
   }
 }
-
-// {/* <section>
-//         <div className="container">
-//               <h1 className="title">
-//                 GradCam
-//       </h1>
-//               <h2 className="subtitle">
-//                 {JSON.stringify(this.state.colors)}
-//               </h2>
-//               <input className="input" type="number" placeholder="Text input" onChange={(e) => this.handleChange(e)} />
-//               <button className="button" onClick={() => this.firstCall()} >Fetch Colors</button>
-//             </div>
-//         </section> */}
