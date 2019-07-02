@@ -6,6 +6,8 @@ import BottomNav from './components/BottomNav';
 import Settings from './components/Settings';
 import GradientBox from './components/GradientBox';
 import VanillaTilt from 'vanilla-tilt';
+import day from './static/svg/day.svg';
+import night from './static/svg/night_time.svg';
 
 export default class App extends React.Component {
 
@@ -17,6 +19,7 @@ export default class App extends React.Component {
       activeOption : 'About',
       type: "linear-gradient",
       style: "",
+      dayFlag: true,
     }
     this.firstCall.bind(this);
     this.handleChange.bind(this);
@@ -76,10 +79,10 @@ export default class App extends React.Component {
 
   render() {
     return (
-      <section className="hero is-black is-fullheight">
+  <section className={!this.state.dayFlag?'hero is-black is-fullheight':'hero is-white is-fullheight'}>
   {/* <!-- Hero head: will stick at the top --> */}
   <div className="hero-head">
-  <NavBar/>
+  <NavBar timeFlag={this.state.dayFlag?"fas fa-lightbulb":"far fa-lightbulb"} onclick={()=>this.setState({dayFlag:!this.state.dayFlag})}/>
   </div>
   {/* <!-- Hero content: will be in the middle --> */}
   <div className="hero-body">
@@ -97,7 +100,12 @@ export default class App extends React.Component {
       handleSelect={(e) => this.handleSelect(e)} 
       submitCount={() => this.firstCall()}
       currentType={this.state.type}
-      />: <h1>Hello, World!</h1>
+      />: <section>
+        <h1 className="is-size-1 is-family-sans-serif has-text-weight-bold">Love Gradients?</h1>
+        <img src={this.state.dayFlag?day:night} width="300xp" height="300px" alt="This shows day or night!" className="dynamic-shadow"/>
+        <p>If you want to learn about different type of gradients and experiment with them, then you are right place.</p>
+        <p>Happy Experimenting!</p>
+      </section>
       }
     </div>
   </div>
