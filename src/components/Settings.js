@@ -7,38 +7,52 @@ const GRADIENT_TYPE = [
     'repeating-radial-gradient',
     'conic-gradient'
 ];
+const STYLE ={
+    inputs:{
+        width: '200px'
+    }
+};
 function Settings(props) {
     return (
-        <section>
-            <div className="container">
+            <div className="container has-text-centered">
                 <h1 className="title">
                     Settings
                 </h1>
-                <p className="subtitle" style={{ whiteSpace: 'nowrap',width: '400px',overflow: 'hidden',textOverflow: 'ellipsis'}}>
+                <p className="subtitle" style={{ whiteSpace: 'nowrap',width: '300px',overflow: 'hidden',textOverflow: 'ellipsis'}}>
                     {props.colors.map((value, index, array) => <span key={`${value}`}><span style={{ background: value }}>{value}</span>{(array.length === index + 1) ? "." : ","}</span>)}
                 </p>
-                <label htmlFor="noc">Number Of Colors</label>
-                <div className="level-item">
+    
                     <div className="field has-addons">
-                        <p className="control">
-                            <input id="noc" name="count" className="input" type="number" placeholder="Number of colors" value={props.count} onChange={props.handleChange} />
+                        <p className="control ">
+                            <input id="noc" style={STYLE.inputs} name="count" min="2" max="1000" className="input" type="number" placeholder={"Current count is "+props.count} onChange={props.handleChange} />
                         </p>
                         <p className="control">
-                            <button className="button" onClick={props.submitCount}>
-                                Save
-          </button>
+                            <button  className="button" onClick={props.submitCount} disabled={props.count>1?false:true}>
+                                Set
+                            </button>
                         </p>
                     </div>
-                </div>
-                <label htmlFor="tog">Gradient Type</label>
-                <div className="select">
+                <div className="field">
+                <p className="control ">
+                <div className="select" >
                     <select name="type" id="tog" onChange={props.handleSelect}>
                         <option value={props.currentType} >{props.currentType}</option>
                         {(GRADIENT_TYPE.filter((value1)=>value1!==props.currentType)).map((value)=><option key={value} value={value}>{value}</option>)}
                     </select>
                 </div>
+                </p>    
+                </div>
+                <div className="field">
+                <p className="control">
+                        <label className="checkbox">
+                            <input type="checkbox" />
+                             Color Interactivity
+                            </label>
+                            <p className="is-size-7">If you touch the box, colors will change.</p>
+                </p>    
+                </div>
             </div>
-        </section>
+      
     );
 }
 
