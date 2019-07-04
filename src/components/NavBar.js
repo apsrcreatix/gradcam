@@ -14,7 +14,7 @@ function Menu(props) {
     </a>       
           <div className="navbar-end">
             <span className="navbar-item">
-            <div class="field is-grouped is-grouped-multiline">
+            <div  className="field is-grouped is-grouped-multiline">
               <p className="control">
               <a className="button is-inverted">
                 <span className="icon">
